@@ -1,3 +1,67 @@
+// HTML Nodes
+const newGameBtn = document.querySelector('#newGame');
+const playBtn = document.querySelector('.playBtn');
+const display = document.querySelector('#display');
+const winnerDisplay = document.querySelector('#winnerDisplay')
+
+const playerScoreDisplay = document.querySelector('#playerScore');
+const computerScoreDisplay = document.querySelector('#computerScore');
+const roundsDisplay = document.querySelector('#totalRounds');
+
+// Global Variables
+let playerScore = 0;
+let computerScore = 0;
+let rounds = 1;
+
+
+// Event Handlers
+playBtn.addEventListener('click', (e) => {
+    const playersChoice = e.target.id;
+    const roundResult = playRound(playersChoice, getComputerChoice());
+
+    updateScore(roundResult);
+
+    display.textContent = roundResult;
+
+    updateScreen();
+
+    if (playerScore === 5) {
+        winnerDisplay.textContent = `You won the war, ${playerScore} by ${computerScore}!`;
+    } else if (computerScore === 5) {
+        winnerDisplay.textContent = `You lost the war, ${computerScore} by ${playerScore}!`;
+    }
+});
+
+newGameBtn.addEventListener('click', newGame);
+
+// Functions
+function newGame() {
+    playerScore = 0;
+    computerScore = 0;
+    rounds = 1;
+
+    display.textContent = "";
+    winnerDisplay.textContent = "";
+
+    updateScreen();
+}
+
+function updateScore(result) {
+    if (result.includes("You win!")) {
+        playerScore++;
+    } else if (result.includes("You lose!")) {
+        computerScore++
+    }
+    rounds++;    
+}
+
+function updateScreen () {
+    roundsDisplay.textContent = `Round: ${rounds}`;
+    playerScoreDisplay.textContent = `Player: ${playerScore}`;
+    computerScoreDisplay.textContent = `Computer: ${computerScore}`;
+}
+
+
 function getComputerChoice() {
     const choices = ["rock", "paper", "scissors"];
     let choiceIndex = Math.round(Math.random() * 2);
@@ -5,21 +69,10 @@ function getComputerChoice() {
     return choices[choiceIndex];
 };
 
-function getPlayerChoice() {
-    let choice = prompt("Choose your attack! (rock, paper or scissors)", "");
-
-    while (choice.length < 1) {
-        choice = prompt("Choose your attack!", "");
-    }
-
-    return choice.toLowerCase();
-};
-
 function playRound(playerSelection, computerSelection) {
     // Tie
     if (playerSelection == computerSelection) {
-        console.log("It's a tie. Play again!");
-        return playRound(getPlayerChoice(), getComputerChoice());
+        return "It's a tie. Play again!";
     }
     // Player Wins
     else if (playerSelection == "rock" && computerSelection == "scissors") {
@@ -38,32 +91,3 @@ function playRound(playerSelection, computerSelection) {
         return `You lose! ${computerSelection} beats ${playerSelection}`;
     }
 };
-
-function game() {
-    let rounds = 0;
-    let player = 0;
-    let computer = 0;
-
-    while (rounds < 5) {
-        let result = playRound(getPlayerChoice(), getComputerChoice());
-        console.log(result);
-
-        if (result.includes("You win!")) {
-            player++;
-        } else if (result.includes("You lose!")) {
-            computer++
-        }
-
-        rounds++;
-        console.log(`Player: ${player} vs Computer: ${computer}`);
-        console.log(`Remaining rounds: ${5 - rounds}`);
-    }
-
-    if (player > computer) {
-        return `You won the war, ${player} by ${computer}!`;
-    } else {
-        return `You lost the war, ${computer} by ${player}!`;
-    }   
-};
-
-console.log(game());
