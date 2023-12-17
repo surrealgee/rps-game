@@ -5,8 +5,12 @@
 body {
     padding: 2em;
     margin: 0;
-    background-color: #131537;
+    background-color: #1F3757;
     font-family: 'Barlow Semi Condensed', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
 }
 
 header {
@@ -45,4 +49,20 @@ header {
     font-size: 40px;
     font-weight: 700;
     line-height: 40px;
+}
+
+/* */
+
+.playground {
+    min-width: 312px;
+    min-height: 282px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: start;
+    gap: 2em;
+    background-image: url(./images/bg-triangle.svg);
+    background-size: 188px 166px ;
+    background-repeat: no-repeat;
+    background-position: center;
 }
