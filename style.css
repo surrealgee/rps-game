@@ -38,7 +38,7 @@ header {
 }
 
 .score-title {
-    color: #2A45C2;    
+    color: #2A45C2;
     font-size: 10px;
     font-weight: 600;
     letter-spacing: 1.5px;
@@ -62,7 +62,22 @@ header {
     align-items: start;
     gap: 2em;
     background-image: url(./images/bg-triangle.svg);
-    background-size: 188px 166px ;
+    background-size: 188px 166px;
     background-repeat: no-repeat;
     background-position: center;
+}
+
+/*  */
+
+.rules-btn {
+    border-radius: 8px;
+    border: 1px solid #FFF;
+    color: #FFF;
+    text-align: center;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    margin: 0 auto;
+    display: block;
+    max-width: 128px;
+    padding: 0.65em 2em;
 }
